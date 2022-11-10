@@ -4,6 +4,7 @@ import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.events.guild.member.update.GuildMemberUpdateNicknameEvent;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -66,7 +67,7 @@ public class HV extends ListenerAdapter {
             mcb.addContent("" +
                     "Click button below to verify your account! \n\n" +
                     "**Steps to Verify**:\n" +
-                    "*1. Log into `verify.insideagent.bot` on your minecraft client.\n" +
+                    "*1. Log into `verify.insideagent.pro` on your minecraft client.\n" +
                     "2. Write down the `code` given to you by the server.\n" +
                     "3. Come back to discord and click the `verify` button, and enter the code when prompted.*\n" +
                     "\n**NOTES**\n" +
@@ -107,10 +108,19 @@ public class HV extends ListenerAdapter {
                 stmt.executeUpdate("DELETE FROM mc_auth WHERE `key`=CAST('" + code + "' AS BINARY);");
                 stmt.close();
                 set.close();
+                event.getGuild().addRoleToMember(event.getMember(), event.getGuild().getRoleById(1040086646252650517L)).queue();
+                System.out.println("Added role to: " + ign);
                 event.reply("Successfully Verified account!").setEphemeral(true).queue();
             } catch (SQLException ex) {
                 ex.printStackTrace();
             }
+        }
+    }
+
+    @Override
+    public void onGuildMemberUpdateNickname(GuildMemberUpdateNicknameEvent event) {
+        if (event.getMember().getRoles().contains(event.getGuild().getRoleById(1040086646252650517L))) {
+            event.getGuild().removeRoleFromMember(event.getMember(), event.getGuild().getRoleById(1040086646252650517L)).queue();
         }
     }
 

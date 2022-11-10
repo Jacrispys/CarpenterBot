@@ -43,7 +43,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>dev.jacrispys.JavaBot.JavaBotMain</mainClass>
+              <mainClass>dev.jacrispys.HousingVerification.HV</mainClass>
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
               <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
             </manifest>
