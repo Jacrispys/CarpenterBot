@@ -3,6 +3,7 @@ package dev.jacrispys.HousingVerification;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.Permission;
+import net.dv8tion.jda.api.entities.Activity;
 import net.dv8tion.jda.api.events.interaction.ModalInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.command.SlashCommandInteractionEvent;
 import net.dv8tion.jda.api.events.interaction.component.ButtonInteractionEvent;
@@ -32,6 +33,7 @@ public class HV extends ListenerAdapter {
                 .enableIntents(GatewayIntent.GUILD_MEMBERS, GatewayIntent.GUILD_PRESENCES, GatewayIntent.MESSAGE_CONTENT)
                 .enableCache(CacheFlag.ACTIVITY, CacheFlag.VOICE_STATE)
                 .build();
+        jda.getPresence().setPresence(Activity.competing(" Housing Awards"), false);
         connectionManager();
         thread.start();
         jda.addEventListener(getInstance());
@@ -102,7 +104,9 @@ public class HV extends ListenerAdapter {
                 try {
                     event.getMember().modifyNickname(ign).queue();
                 } catch (HierarchyException ignored) {}
-
+                stmt.executeUpdate("DELETE FROM mc_auth WHERE `key`=CAST('" + code + "' AS BINARY);");
+                stmt.close();
+                set.close();
                 event.reply("Successfully Verified account!").setEphemeral(true).queue();
             } catch (SQLException ex) {
                 ex.printStackTrace();
@@ -140,7 +144,9 @@ public class HV extends ListenerAdapter {
                         Thread.sleep(3600 * 1000);
                         return;
                     }
+                    System.out.println("Enabling Database...");
                     connection = resetConnection("mc_discord");
+                    System.out.println("Enabled!");
                 } catch (SQLException | InterruptedException ex) {
                     ex.printStackTrace();
                 }
