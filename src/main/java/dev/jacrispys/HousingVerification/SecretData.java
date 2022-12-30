@@ -24,6 +24,7 @@ public class SecretData {
                 fileInfo.put("DATA_BASE_PASS", " ");
                 fileInfo.put("DB_HOST", "localhost");
                 fileInfo.put("TOKEN", " ");
+                fileInfo.put("HYPIXEL-API", " ");
                 FileWriter writer = new FileWriter(file.getPath());
                 fileInfo.keySet().forEach(key -> {
                     try {
@@ -50,5 +51,9 @@ public class SecretData {
 
     public static String getToken() {
         return (String) loginInfo.get("TOKEN");
+    }
+
+    public static String getHypixelToken() {
+        return (String) loginInfo.get("HYPIXEL-API");
     }
 }

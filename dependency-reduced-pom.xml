@@ -43,7 +43,7 @@
             <manifest>
               <addClasspath>true</addClasspath>
               <classpathPrefix>lib/</classpathPrefix>
-              <mainClass>dev.jacrispys.JavaBot.JavaBotMain</mainClass>
+              <mainClass>dev.jacrispys.HousingVerification.HV</mainClass>
               <addDefaultImplementationEntries>true</addDefaultImplementationEntries>
               <addDefaultSpecificationEntries>true</addDefaultSpecificationEntries>
             </manifest>
@@ -62,6 +62,10 @@
     <repository>
       <id>jitpack</id>
       <url>https://jitpack.io</url>
+    </repository>
+    <repository>
+      <id>Hypixel</id>
+      <url>https://repo.hypixel.net/repository/Hypixel/</url>
     </repository>
   </repositories>
   <properties>

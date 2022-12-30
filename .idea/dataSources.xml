@@ -8,5 +8,12 @@
       <jdbc-url>jdbc:mysql://73.109.66.109:3306/mc_discord</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
     </data-source>
+    <data-source source="LOCAL" name="73.109.66.109 [2]" uuid="3208b66f-1e6e-4452-9a6c-0b33d9077c79">
+      <driver-ref>mysql.8</driver-ref>
+      <synchronize>true</synchronize>
+      <jdbc-driver>com.mysql.cj.jdbc.Driver</jdbc-driver>
+      <jdbc-url>jdbc:mysql://73.42.247.197:3306/mc_discord</jdbc-url>
+      <working-dir>$ProjectFileDir$</working-dir>
+    </data-source>
   </component>
 </project>
