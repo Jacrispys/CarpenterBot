@@ -171,7 +171,7 @@ public class TicketMsg extends ListenerAdapter {
         TextChannel ticketChannel = event.getGuild().getTextChannelById(1061791370718744717L);
         TextChannel supportChannel = event.getGuild().getTextChannelById(1061868399241732176L);
         supportChannel.createThreadChannel(event.getUser().getName() + " - (" + ticketUUID + ")", true).setInvitable(false).queue(thread -> {
-            ticketChannel.sendMessage("Created a ticket for" + event.getMember().getUser().getAsTag() + " at: <#" + thread.getIdLong() + ">").queue();
+            ticketChannel.sendMessage("Created a ticket for " + event.getMember().getUser().getAsTag() + " at: <#" + thread.getIdLong() + ">").queue();
             supportChannel.getManager().putMemberPermissionOverride(event.getMember().getIdLong(), null, Collections.singleton(Permission.MESSAGE_SEND_IN_THREADS)).queue();
             thread.addThreadMember(event.getMember()).queue();
             event.reply("Created your ticket at: <#" + thread.getIdLong() + ">").setEphemeral(true).queue();
