@@ -90,7 +90,7 @@ public class TicketMsg extends ListenerAdapter {
             mcb.addEmbeds(eb.build());
             thread.sendMessage(mcb.build()).queue();
             event.reply("Your report has been recorded! A moderator will be with you shortly.").queue();
-            String threadName = event.getChannel().getName();
+            String threadName = event.getChannel().getName().split("] ")[1];
             event.getChannel().asThreadChannel().getManager().setName("[OPEN] " + threadName).queue();
             event.getMessage().delete().queue();
             event.getChannel().asThreadChannel().getParentChannel().asTextChannel().getManager().putMemberPermissionOverride(event.getMember().getIdLong(), Collections.singleton(Permission.MESSAGE_SEND_IN_THREADS), null).queue();
@@ -118,7 +118,7 @@ public class TicketMsg extends ListenerAdapter {
             MessageCreateBuilder mcb2 = new MessageCreateBuilder();
             Button reviewed = Button.primary("reviewed:" + channelId, "Mark as reviewed");
             mcb2.setActionRow(reviewed);
-            String threadName = event.getChannel().getName();
+            String threadName = event.getChannel().getName().split("] ")[1];
             event.getChannel().asThreadChannel().getManager().setName("[SUBMISSION] " + threadName).queue();
             event.getChannel().asThreadChannel().sendMessage(mcb2.build()).queue();
 
@@ -130,7 +130,7 @@ public class TicketMsg extends ListenerAdapter {
             eb.setColor(0x801123);
             mcb.setEmbeds(eb.build());
             event.reply("A moderator will be with you soon.").setEphemeral(true).queue();
-            String threadName = event.getChannel().getName();
+            String threadName = event.getChannel().getName().split("] ")[1];
             event.getChannel().asThreadChannel().getManager().setName("[OPEN] " + threadName).queue();
             event.getMessage().delete().queue();
             event.getChannel().asThreadChannel().sendMessage(mcb.build()).queue();
@@ -260,7 +260,7 @@ public class TicketMsg extends ListenerAdapter {
         } else {
             event.reply("Closing thread.").setEphemeral(true).queue();
             thread.sendMessage("Thread closed by author.").queue();
-            thread.getManager().setName("[ARCHIVED] " + thread.getName()).queue();
+            thread.getManager().setName("[ARCHIVED] " + thread.getName().split("] ")[1]).queue();
             thread.getManager().setLocked(true).queue();
             thread.getManager().setArchived(true).queue();
         }
