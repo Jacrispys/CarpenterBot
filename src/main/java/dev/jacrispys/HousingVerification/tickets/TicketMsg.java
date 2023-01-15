@@ -76,7 +76,8 @@ public class TicketMsg extends ListenerAdapter {
             event.reply("Ticket closed successfully.").setEphemeral(true).queue();
             thread.sendMessage("Thread closed by moderator. \n" +
                     "Reason: `" + event.getValue("reason").getAsString() + "`").queue();
-            thread.getManager().setName("[CLOSED] " + thread.getName()).queue();
+            String threadName = event.getChannel().getName().split("] ")[1];
+            thread.getManager().setName("[CLOSED] " + threadName).queue();
             thread.getManager().setLocked(true).queue();
             thread.getManager().setArchived(true).queue();
         } else if (event.getModalId().split(":")[0].equals("reportModal")) {
